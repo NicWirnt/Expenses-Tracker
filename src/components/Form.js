@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Category } from './Category';
+import { ExpenseTable } from './ExpenseTable';
 
 
 
@@ -8,25 +9,25 @@ export const Form = () => {
         item: "",
         cost: "",
         category: "",
-        date: ""
+        datePicker: ""
     }
 
     const [categoryList, setCategoryList] = useState([]);
     
-    const [newExpense,setNewExpense] = useState([initialState]);
+    const [newExpense,setNewExpense] = useState(initialState);
     const [expense,setExpense] = useState([]);
 
 
 
     const handleOnChange = e => {
-        const value = e.target.value;
-        const name = e.target.name;
-        setNewExpense({
-            
+        const {name, value} = e.target;
+        setNewExpense({...newExpense,
+          [name] :  value
         })
-
-        console.log(name);
-        console.log(value);
+        
+        console.log(newExpense)
+        // console.log(name);
+        // console.log(value);
     }
 
     const handleOnClick = e => {
@@ -35,19 +36,24 @@ export const Form = () => {
 
         setCategoryList([...categoryList, newCategory]);
         console.log(categoryList);
+        document.getElementById("newCategory").value = ""
     }
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         
         
-        setExpense([...expense,newExpense])
-        console.log()
+       addNewExpense(newExpense);
+       setNewExpense(initialState);
+        console.log(expense)
+    }
+
+    const addNewExpense = e =>{
+      setExpense([...expense, e])
     }
 
   return (
     <div>
-
         <form className="row gx-3 gy-2 align-items-center">
   <div className="newCategory col-md-8">
     <input type="text" className="form-control" placeholder="Input New Category" id="newCategory" />
@@ -69,12 +75,16 @@ export const Form = () => {
   <div className="col-sm-6">
    
   <Category categoryList={categoryList} handleOnChange={handleOnChange}/>
+ 
   </div>
   
   <div className="col-auto">
     <button type="submit" className="btn btn-primary btnSubmit" onClick={handleOnSubmit}>Submit</button>
   </div>
 </form>
+
+      <h1>Filter by Date</h1>
+      <ExpenseTable expense={expense}/>
 
     </div>
   )
