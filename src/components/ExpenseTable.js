@@ -11,6 +11,7 @@ export const ExpenseTable = ({ expense }) => {
             <th scope="col">Cost</th>
             <th scope="col">Category</th>
             <th scope="col">Date</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         {console.log(expense)}
@@ -24,11 +25,13 @@ export const ExpenseTable = ({ expense }) => {
                 <td>{item.category}</td>
                 <td>{item.datePicker}</td>
                 <td>
-                  <i className="fas fa-eraser"></i>
+                  <button>
+                    <i className="fas fa-eraser"></i>
+                  </button>
                 </td>
               </tr>
             );
-          })
+          })}
         </tbody>
       </table>
     </div>

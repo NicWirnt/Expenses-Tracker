@@ -1,12 +1,21 @@
-import './App.css';
-import { ExpenseTable } from './components/ExpenseTable';
-import { Form } from './components/Form';
+import { useState } from "react";
+import "./App.css";
+import { ExpenseTable } from "./components/ExpenseTable";
+import { FilterByDate } from "./components/FilterByDate";
+import { Form } from "./components/Form";
 
 function App() {
+  const [expense, setExpense] = useState([]);
+  const [showAll, setShowAll] = useState();
+  const addNewExpense = (item) => {
+    setExpense([...expense, item]);
+  };
+
   return (
     <div className="">
-      <Form />
-      
+      <Form expense={expense} addNewExpense={addNewExpense} />
+      <FilterByDate expense={expense} />
+      <ExpenseTable expense={expense} />
     </div>
   );
 }
