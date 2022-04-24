@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const FilterByDate = ({ expense }) => {
-  const handleOnChange = () => {};
-
+export const FilterByDate = ({ expense, handleOnFilter }) => {
   return (
     <div>
       <h2>Filter expenses by Date</h2>
-      <input type="date" onChange="handleOnChange"></input>
+      <input className="col-md-6" type="date" onChange={handleOnFilter}></input>
+      <button className="col-md-6">Show all</button>
     </div>
   );
 };

@@ -8,6 +8,7 @@ export const Form = ({ expense, addNewExpense }) => {
     cost: "",
     category: "",
     datePicker: "",
+    category: "",
   };
 
   const [categoryList, setCategoryList] = useState([]);
@@ -25,7 +26,6 @@ export const Form = ({ expense, addNewExpense }) => {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setNewExpense({ ...newExpense, [name]: value });
-
     console.log(newExpense);
     // console.log(name);
     // console.log(value);
@@ -33,11 +33,8 @@ export const Form = ({ expense, addNewExpense }) => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    const newCategory = document.getElementById("newCategory").value;
-
-    setCategoryList([...categoryList, newCategory]);
+    setCategoryList([...categoryList, newExpense.category]);
     console.log(categoryList);
-    document.getElementById("newCategory").value = "";
   };
 
   const date = new Date();
@@ -54,9 +51,11 @@ export const Form = ({ expense, addNewExpense }) => {
         <div className="newCategory col-md-8">
           <input
             type="text"
+            name="category"
             className="form-control"
             placeholder="Input New Category"
             id="newCategory"
+            onChange={handleOnChange}
           />
 
           <div className="col-md-4">
